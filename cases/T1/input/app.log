@@ -1,0 +1,6 @@
+2024-01-01 10:00:00 INFO  service started
+2024-01-01 10:01:00 INFO  loading config
+2024-01-01 10:02:00 WARN  config missing optional field
+2024-01-01 10:03:00 INFO  processing batch 1
+2024-01-01 10:03:30 INFO  batch 1 done
+2024-01-01 10:04:00 INFO  status: OK

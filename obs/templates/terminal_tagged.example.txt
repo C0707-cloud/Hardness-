@@ -1,0 +1,7 @@
+# obs-v1 tagged terminal log example
+# format: <ts> | <event_type> | key=value; key=value; ...
+2026-11-21T10:00:00+08:00 | run.start | product=Codex; task_id=T1; log_complete=true; capabilities={}
+2026-11-21T10:00:01+08:00 | tool.call | phase=requested; call_id=c1; call_scope=top_level; tool_name=read_file; args_digest=sha256:aaa; args_summary={"path":"input/报表.txt"}
+2026-11-21T10:00:02+08:00 | tool.call | phase=completed; call_id=c1; call_scope=top_level; tool_name=read_file; args_digest=sha256:aaa; result_status=success; exit_code=0
+2026-11-21T10:00:03+08:00 | artifact.event | op=create; path=output/extract.csv; content_digest=sha256:bbb; size=128; encoding=utf-8; newline=LF; bom=false; call_id=c1
+2026-11-21T10:00:04+08:00 | run.end | terminate_reason=assertions_passed; evaluator_fallback=false; wall_time_s=4

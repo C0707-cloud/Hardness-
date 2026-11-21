@@ -1,0 +1,197 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "obs-v1.schema.json",
+  "title": "obs-v1 event",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "run_id",
+    "session_id",
+    "seq",
+    "ts",
+    "event_type",
+    "source",
+    "observability",
+    "actor",
+    "evidence_grade"
+  ],
+  "properties": {
+    "schema_version": { "const": "obs-v1" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "seq": { "type": "integer", "minimum": 1 },
+    "ts": { "type": "string", "format": "date-time" },
+    "event_type": {
+      "enum": [
+        "run.start",
+        "run.end",
+        "tool.call",
+        "tool.retry",
+        "artifact.event",
+        "permission.event",
+        "user.input",
+        "unknown.event",
+        "evidence.gap"
+      ]
+    },
+    "source": {
+      "enum": ["product_log", "terminal_capture", "ui_capture", "evaluator", "manual"]
+    },
+    "observability": { "enum": ["visible", "partial", "unknown"] },
+    "actor": { "enum": ["agent", "user", "evaluator", "system"] },
+    "evidence_grade": { "enum": ["E1", "E2", "E3", "E4"] },
+    "product": { "type": "string" },
+    "product_version": { "type": "string" },
+    "model_label": { "type": "string" },
+    "model_fingerprint": { "type": "string" },
+    "task_id": { "type": "string" },
+    "workspace": { "type": "string" },
+    "input_hash": { "type": "string" },
+    "capture_source": { "type": "string" },
+    "observability_tier": { "type": "string" },
+    "authoritative_source": {
+      "enum": ["product_log", "terminal_capture", "ui_capture", "evaluator", "manual"]
+    },
+    "trace_origin": {
+      "enum": ["product_exported", "evaluator_reconstructed", "mixed"]
+    },
+    "log_complete": { "type": "boolean" },
+    "capabilities": { "type": "object" },
+    "workspace_pre_hash": { "type": "string" },
+    "end_ts": { "type": "string" },
+    "wall_time_s": { "type": "number" },
+    "terminate_reason": { "type": "string" },
+    "completion_at_terminate": { "type": "number", "minimum": 0, "maximum": 100 },
+    "evaluator_fallback": { "type": "boolean" },
+    "timeout_source": { "enum": ["product", "evaluator"] },
+    "timeout_ts": { "type": "string" },
+    "workspace_post_hash": { "type": "string" },
+    "output_hashes": { "type": "array" },
+    "phase": { "enum": ["requested", "completed", "failed", "rejected"] },
+    "call_id": { "type": "string" },
+    "call_scope": { "enum": ["top_level", "subcall"] },
+    "parent_call_id": { "type": "string" },
+    "tool_name": { "type": "string" },
+    "args_digest": { "type": "string" },
+    "args_summary": { "type": ["object", "string"] },
+    "tool_kind": { "enum": ["read", "write", "command", "other", "unknown"] },
+    "validity": { "enum": ["valid", "invalid", "unknown"] },
+    "invalid_kind": {
+      "enum": [
+        "unknown_tool",
+        "schema_error",
+        "missing_arg",
+        "type_error",
+        "bad_reference",
+        "permission_denied",
+        "other"
+      ]
+    },
+    "unnecessary": { "type": "boolean" },
+    "unnecessary_kind": { "enum": ["duplicate", "irrelevant", "overkill", "other"] },
+    "unnecessary_reason": { "type": "string" },
+    "result_status": { "type": "string" },
+    "exit_code": { "type": "integer" },
+    "output_digest": { "type": "string" },
+    "output_ref": { "type": "string" },
+    "stdout_digest": { "type": "string" },
+    "stderr_digest": { "type": "string" },
+    "duration_ms": { "type": "number" },
+    "error_code": { "type": "string" },
+    "error_message": { "type": "string" },
+    "retryable": { "type": "boolean" },
+    "reject_reason": { "type": "string" },
+    "retry_of_call_id": { "type": "string" },
+    "retry_scope": { "enum": ["internal", "top_level"] },
+    "retry_index": { "type": "integer", "minimum": 1 },
+    "retry_reason": { "type": "string" },
+    "resolved_call_id": { "type": "string" },
+    "retry_outcome": { "enum": ["recovered", "failed", "unknown"] },
+    "recovered": { "type": "boolean" },
+    "op": { "enum": ["create", "modify", "delete", "upload", "download"] },
+    "path": { "type": "string" },
+    "content_digest": { "type": "string" },
+    "size": { "type": "integer", "minimum": 0 },
+    "encoding": { "type": "string" },
+    "newline": { "type": "string" },
+    "bom": { "type": "boolean" },
+    "decision": { "enum": ["requested", "granted", "denied", "blocked", "allowed"] },
+    "permission_id": { "type": "string" },
+    "scope_type": { "enum": ["path", "network", "command", "ui", "upload"] },
+    "ui_action": { "type": "string" },
+    "scope_value": { "type": "string" },
+    "requested_by": { "type": "string" },
+    "decided_by": { "type": "string" },
+    "message": { "type": "string" },
+    "evidence_ref": { "type": "string" },
+    "kind": { "enum": ["semantic", "mechanical", "control"] },
+    "permission_ref": { "type": "string" },
+    "initial_prompt": { "type": "boolean" },
+    "count": { "type": "integer", "minimum": 1 },
+    "turn_index": { "type": "integer", "minimum": 0 },
+    "unknown_kind": { "enum": ["unknown", "unobservable"] },
+    "reason": { "type": "string" },
+    "estimated_count": { "type": "null" },
+    "affected_capability": { "type": "string" },
+    "affected_capabilities": { "type": "array", "items": { "type": "string" } },
+    "gap_type": {
+      "enum": [
+        "missing_timestamp",
+        "missing_args",
+        "missing_result",
+        "no_raw_log",
+        "no_raw_structure"
+      ]
+    },
+    "affected_event_types": { "type": "array", "items": { "type": "string" } },
+    "affected_event_ids": { "type": "array", "items": { "type": "string" } },
+    "affected_seqs": { "type": "array", "items": { "type": "integer" } },
+    "impact": { "enum": ["partial", "unusable"] },
+    "raw_ref": { "type": "string" },
+    "raw_sha256": { "type": "string" },
+    "raw_mtime": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "event_type": { "const": "run.start" } } },
+      "then": { "required": ["product", "task_id", "log_complete", "capabilities"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "run.end" } } },
+      "then": { "required": ["terminate_reason", "evaluator_fallback", "wall_time_s"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "tool.call" } } },
+      "then": { "required": ["phase", "call_id", "call_scope", "tool_name"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "tool.retry" } } },
+      "then": {
+        "required": ["retry_of_call_id", "retry_scope", "retry_index", "retry_reason", "result_status", "retry_outcome"]
+      }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "artifact.event" } } },
+      "then": { "required": ["op", "path"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "permission.event" } } },
+      "then": { "required": ["decision", "scope_type", "scope_value"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "user.input" } } },
+      "then": { "required": ["kind"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "unknown.event" } } },
+      "then": { "required": ["unknown_kind", "reason", "estimated_count"] }
+    },
+    {
+      "if": { "properties": { "event_type": { "const": "evidence.gap" } } },
+      "then": { "required": ["gap_type", "affected_event_types", "impact"] }
+    }
+  ]
+}

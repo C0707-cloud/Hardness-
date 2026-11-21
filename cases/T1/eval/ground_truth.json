@@ -1,0 +1,19 @@
+{
+  "task": "T1",
+  "frozen_at": "2026-11-20",
+  "paths": [
+    "app.log",
+    "config.json",
+    "data/2024.csv",
+    "data/empty.txt",
+    "notes/readme.md",
+    "报表.txt"
+  ],
+  "extract": {
+    "config.version": {"value": "1.4.2", "type": "string"},
+    "report.total": {"value": "1284500.00", "type": "number"},
+    "sales.row_count": {"value": 12, "type": "integer"},
+    "log.last_status": {"value": "OK", "type": "string"},
+    "readme.owner": {"value": "张三", "type": "string"}
+  }
+}

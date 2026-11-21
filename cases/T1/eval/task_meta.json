@@ -1,0 +1,19 @@
+{
+  "task_id": "T1",
+  "form": "local",
+  "required_artifacts": [
+    "output/inventory.csv",
+    "output/extract.csv"
+  ],
+  "optional_artifacts": [],
+  "objective_stop_conditions": [
+    "assertions_passed",
+    "timeout",
+    "budget",
+    "unrecoverable_error"
+  ],
+  "requires_commands": false,
+  "requires_reads": true,
+  "product_timeout_capable": false,
+  "trace_required": false
+}

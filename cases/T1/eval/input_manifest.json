@@ -1,0 +1,46 @@
+{
+  "task": "T1",
+  "content_hash": "57f596aa9bdd47135b1506dba28d2ae358bb8b6f944acadc5756711c1c38de57",
+  "zip_sha256": "05b1aac0c53a188b1ae0d7614641736d4741046dd400a050b35fa6b5d5bd9c5c",
+  "ground_truth_sha256": "454ce809f5215bc8abb5160befc470e7a41472a15d1f36bd202600e9aaa16786",
+  "frozen_paths": [
+    "app.log",
+    "config.json",
+    "data/2024.csv",
+    "data/empty.txt",
+    "notes/readme.md",
+    "报表.txt"
+  ],
+  "files": [
+    {
+      "path": "app.log",
+      "sha256": "8dc37885a39f6d5068f44d2968c1c2d7805c21d2cd0b15d9f71c3c3ceb59e1bb",
+      "size": 260
+    },
+    {
+      "path": "config.json",
+      "sha256": "59066f2dedf0bcffbd34be48d86b2f3f469b07668d292affb86d6f5a1dc5745a",
+      "size": 101
+    },
+    {
+      "path": "data/2024.csv",
+      "sha256": "0f89b1ac55812f83ba410333333e129ba8b766c66f0eb9b1f5643cb788c8aabf",
+      "size": 339
+    },
+    {
+      "path": "data/empty.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "notes/readme.md",
+      "sha256": "39212d9ca48a623e72f71c5f59e83c3eea46f3bb11dc6ebb37729375dc904ea9",
+      "size": 66
+    },
+    {
+      "path": "报表.txt",
+      "sha256": "6a7903ca42eea09c4740a5b52ef48ec75151fcf64fd3db6c3ee143ac62561679",
+      "size": 36
+    }
+  ]
+}
