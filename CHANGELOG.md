@@ -7,7 +7,7 @@
 
 ## 2026-11-21
 
-### 项目发布（GitHub）
+### 项目上传（GitHub）
 
 - **Added** 项目推送至 GitHub 公共仓库 `C0707-cloud/Hardness-`（默认分支 `main`）。
 - **Added** `.gitignore`：忽略 `__pycache__/`、`*.pyc`、`.DS_Store`、`Thumbs.db`，不纳入版本库。
