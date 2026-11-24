@@ -264,6 +264,17 @@ def main():
            and len(info["sha256"]) == 64 and info["size"] == 14,
            "size=%d newline=%s bom=%s" % (info["size"], info["newline"], info["bom_utf8"]))
 
+    with open(p, "wb") as fh:
+        fh.write(b"path\tformat\tencoding\r\na.txt\ttxt\tutf-8\n")
+    info = checker.inspect_output_file(p)
+    record("5f-tab-delimiter-and-mixed-endings",
+           info["comma_delimited"] is False and info["newline"] == "mixed")
+    with open(p, "wb") as fh:
+        fh.write(b'\xef\xbb\xbf"path","format","encoding"\r\na.txt,txt,utf-8\r\n')
+    info = checker.inspect_output_file(p)
+    record("5f-comma-delimiter-with-bom",
+           info["comma_delimited"] is True and info["bom_utf8"] is True)
+
     print("-" * 50)
     if all(results):
         print("ALL PASS (%d/%d)" % (len(results), len(results)))

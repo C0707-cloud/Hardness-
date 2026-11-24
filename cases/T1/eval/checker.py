@@ -223,16 +223,31 @@ def inspect_output_file(path):
     except OSError:
         return {"path": path, "error": "unreadable"}
     try:
-        raw.decode("utf-8")
+        text = raw.decode("utf-8-sig")
         utf8_ok = True
     except UnicodeDecodeError:
         utf8_ok = False
-    if b"\r\n" in raw:
-        newline = "crlf"
-    elif b"\n" in raw:
-        newline = "lf"
-    else:
-        newline = "none"
+    without_crlf = raw.replace(b"\r\n", b"")
+    endings = [
+        name for name, present in (
+            ("crlf", b"\r\n" in raw), ("lf", b"\n" in without_crlf),
+            ("cr", b"\r" in without_crlf),
+        ) if present
+    ]
+    newline = endings[0] if len(endings) == 1 else "mixed" if endings else "none"
+    delimiter_ok = None
+    expected = {
+        "inventory.csv": {"path", "format", "encoding"},
+        "extract.csv": {"key", "value"},
+    }.get(os.path.basename(path))
+    if utf8_ok and expected:
+        first_line = _first_nonempty_line(_normalize(text))
+        for separator in (",", "\t", ";", "|"):
+            header = next(csv.reader([first_line], delimiter=separator), [])
+            columns = {column.strip().lower() for column in header}
+            if len(header) == len(expected) and columns == expected:
+                delimiter_ok = separator == ","
+                break
     return {
         "path": path,
         "sha256": inputpkg.sha256_bytes(raw),
@@ -240,6 +255,7 @@ def inspect_output_file(path):
         "bom_utf8": raw.startswith(b"\xef\xbb\xbf"),
         "newline": newline,
         "decodable_utf8": utf8_ok,
+        "comma_delimited": delimiter_ok,
     }
 
 
